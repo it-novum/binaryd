@@ -113,12 +113,14 @@ func (w *HttpHandler) handleExecuteCommandJson(response http.ResponseWriter, req
 	var commandLine string
 
 	commandFromUrl := strings.TrimLeft(request.URL.Path, "/json/")
+	fmt.Println(commandFromUrl)
 
 	for _, command := range w.config.Commands {
 		if command.CommandName == commandFromUrl {
 			commandLine = command.CommandLine
 		}
 	}
+	fmt.Println(commandLine)
 
 	timeout := 300 * time.Second
 	result, _ := utils.RunCommand(w.parentCtx, utils.CommandArgs{
